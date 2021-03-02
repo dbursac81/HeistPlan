@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Ag04Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblHeist">
+          <Key>
+            <PropertyRef Name="HeistID" />
+          </Key>
+          <Property Name="HeistID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblHeistMember">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblHeistSkills">
+          <Key>
+            <PropertyRef Name="SkillsID" />
+          </Key>
+          <Property Name="SkillsID" Type="int" Nullable="false" />
+          <Property Name="HeistID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="SkillLevel" Type="smallint" />
+          <Property Name="MembersNo" Type="smallint" />
+        </EntityType>
+        <EntityType Name="tblMemberSkills">
+          <Key>
+            <PropertyRef Name="SkillID" />
+          </Key>
+          <Property Name="SkillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SkillLevel" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblHeistSkills_tblHeist">
+          <End Role="tblHeist" Type="Self.tblHeist" Multiplicity="1" />
+          <End Role="tblHeistSkills" Type="Self.tblHeistSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHeist">
+              <PropertyRef Name="HeistID" />
+            </Principal>
+            <Dependent Role="tblHeistSkills">
+              <PropertyRef Name="HeistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMemberSkills_tblHeistMember">
+          <End Role="tblHeistMember" Type="Self.tblHeistMember" Multiplicity="1" />
+          <End Role="tblMemberSkills" Type="Self.tblMemberSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHeistMember">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="tblMemberSkills">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Ag04ModelStoreContainer">
+          <EntitySet Name="tblHeist" EntityType="Self.tblHeist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHeistMember" EntityType="Self.tblHeistMember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHeistSkills" EntityType="Self.tblHeistSkills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMemberSkills" EntityType="Self.tblMemberSkills" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblHeistSkills_tblHeist" Association="Self.FK_tblHeistSkills_tblHeist">
+            <End Role="tblHeist" EntitySet="tblHeist" />
+            <End Role="tblHeistSkills" EntitySet="tblHeistSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMemberSkills_tblHeistMember" Association="Self.FK_tblMemberSkills_tblHeistMember">
+            <End Role="tblHeistMember" EntitySet="tblHeistMember" />
+            <End Role="tblMemberSkills" EntitySet="tblMemberSkills" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Ag04Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblHeist">
+          <Key>
+            <PropertyRef Name="HeistID" />
+          </Key>
+          <Property Name="HeistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="tblHeistSkills" Relationship="Self.FK_tblHeistSkills_tblHeist" FromRole="tblHeist" ToRole="tblHeistSkills" />
+        </EntityType>
+        <EntityType Name="tblHeistMember">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="tblMemberSkills" Relationship="Self.FK_tblMemberSkills_tblHeistMember" FromRole="tblHeistMember" ToRole="tblMemberSkills" />
+        </EntityType>
+        <EntityType Name="tblHeistSkills">
+          <Key>
+            <PropertyRef Name="SkillsID" />
+          </Key>
+          <Property Name="SkillsID" Type="Int32" Nullable="false" />
+          <Property Name="HeistID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SkillLevel" Type="Int16" />
+          <Property Name="MembersNo" Type="Int16" />
+          <NavigationProperty Name="tblHeist" Relationship="Self.FK_tblHeistSkills_tblHeist" FromRole="tblHeistSkills" ToRole="tblHeist" />
+        </EntityType>
+        <EntityType Name="tblMemberSkills">
+          <Key>
+            <PropertyRef Name="SkillID" />
+          </Key>
+          <Property Name="SkillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SkillLevel" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblHeistMember" Relationship="Self.FK_tblMemberSkills_tblHeistMember" FromRole="tblMemberSkills" ToRole="tblHeistMember" />
+        </EntityType>
+        <Association Name="FK_tblHeistSkills_tblHeist">
+          <End Role="tblHeist" Type="Self.tblHeist" Multiplicity="1" />
+          <End Role="tblHeistSkills" Type="Self.tblHeistSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHeist">
+              <PropertyRef Name="HeistID" />
+            </Principal>
+            <Dependent Role="tblHeistSkills">
+              <PropertyRef Name="HeistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMemberSkills_tblHeistMember">
+          <End Role="tblHeistMember" Type="Self.tblHeistMember" Multiplicity="1" />
+          <End Role="tblMemberSkills" Type="Self.tblMemberSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHeistMember">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="tblMemberSkills">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Ag04Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblHeist" EntityType="Self.tblHeist" />
+          <EntitySet Name="tblHeistMember" EntityType="Self.tblHeistMember" />
+          <EntitySet Name="tblHeistSkills" EntityType="Self.tblHeistSkills" />
+          <EntitySet Name="tblMemberSkills" EntityType="Self.tblMemberSkills" />
+          <AssociationSet Name="FK_tblHeistSkills_tblHeist" Association="Self.FK_tblHeistSkills_tblHeist">
+            <End Role="tblHeist" EntitySet="tblHeist" />
+            <End Role="tblHeistSkills" EntitySet="tblHeistSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMemberSkills_tblHeistMember" Association="Self.FK_tblMemberSkills_tblHeistMember">
+            <End Role="tblHeistMember" EntitySet="tblHeistMember" />
+            <End Role="tblMemberSkills" EntitySet="tblMemberSkills" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Ag04ModelStoreContainer" CdmEntityContainer="Ag04Entities">
+          <EntitySetMapping Name="tblHeist">
+            <EntityTypeMapping TypeName="Ag04Model.tblHeist">
+              <MappingFragment StoreEntitySet="tblHeist">
+                <ScalarProperty Name="HeistID" ColumnName="HeistID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblHeistMember">
+            <EntityTypeMapping TypeName="Ag04Model.tblHeistMember">
+              <MappingFragment StoreEntitySet="tblHeistMember">
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblHeistSkills">
+            <EntityTypeMapping TypeName="Ag04Model.tblHeistSkills">
+              <MappingFragment StoreEntitySet="tblHeistSkills">
+                <ScalarProperty Name="SkillsID" ColumnName="SkillsID" />
+                <ScalarProperty Name="HeistID" ColumnName="HeistID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SkillLevel" ColumnName="SkillLevel" />
+                <ScalarProperty Name="MembersNo" ColumnName="MembersNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMemberSkills">
+            <EntityTypeMapping TypeName="Ag04Model.tblMemberSkills">
+              <MappingFragment StoreEntitySet="tblMemberSkills">
+                <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SkillLevel" ColumnName="SkillLevel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
