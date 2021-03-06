@@ -11,21 +11,27 @@ namespace AG04.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class tblHeistMember
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class tblMember
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblHeistMember()
+        public tblMember()
         {
             this.tblMemberSkills = new HashSet<tblMemberSkills>();
         }
-    
+
         public int MemberID { get; set; }
+        [Required(ErrorMessage = "Please enter name")]
         public string Name { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public string Status { get; set; }
         public Nullable<bool> Active { get; set; }
-    
+        public Nullable<bool> ActiveInHeist { get; set; }
+        public string Sex { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMemberSkills> tblMemberSkills { get; set; }
     }

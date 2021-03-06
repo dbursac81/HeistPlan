@@ -1,4 +1,4 @@
-﻿@model AG04.Models.tblHeistMember
+﻿@model AG04.SkillModel
 
 @{
     ViewBag.Title = "Details";
@@ -7,9 +7,19 @@
 <h2>Details</h2>
 
 <div>
-    <h4>tblHeistMember</h4>
+    <p>
+        @Html.ActionLink("Add new skill", "Create", "Skill", new { id = ViewBag.MemberID }, new { @class = "btn btn-primary btn-sm" })
+    </p>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.HiddenFor(model => model.MemberID)
+        </dt>
+
+        <dd>
+            @Html.HiddenFor(model => model.MemberID)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -34,17 +44,51 @@
             @Html.DisplayFor(model => model.Status)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.Active)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Active)
+        </dd>*@
+      
+        <dt>
+            Skills
+        </dt>
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Level
+                    </th>
+                </tr>
+
+                @for (int i = 0; i < Model.Skills.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m.Skills[i].Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.Skills[i].Level)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Skill", new { id = Model.Skills[i].SkillID }, new { @class = "btn btn-info btn-sm" })
+                            @Html.ActionLink("Delete", "Delete", "Skill", new { id = Model.Skills[i].SkillID }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+
+            </table>
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MemberID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink("Edit member", "Edit", "Member", new { id = @ViewBag.MemberID }) 
 </p>

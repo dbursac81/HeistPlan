@@ -1,7 +1,56 @@
-﻿
+﻿@model IEnumerable<AG04.Models.tblMember>
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Members Index</h2>
+@using (Html.BeginForm("Index", "Registar2", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container" style="margin-bottom:0px; margin-top:75px;">
+        <div class="row" style="margin-top:15px; margin-bottom:0px;">
+            <div class="col-md-9" style="padding-left:0px;">
+                @Html.ActionLink("Add new member", "Create", "Member", new { @class = "btn btn-primary" })
+            </div>           
+        </div>
+    </div>
+}
+
+<table class="table table-striped table-hover table-bordered" style="margin-top:15px;">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Gender
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="width:240px;">
+                Name
+               @* @Html.DisplayFor(modelItem => item.Name)*@
+            </td>
+            <td style="width:240px;">
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td style="width:240px;">
+                @Html.DisplayFor(modelItem => item.Sex)
+            </td>
+            <td style="width:250px;">
+                @Html.ActionLink("Edit", "Edit", new { id = item.MemberID }, new { @class = "btn btn-info btn-sm" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MemberID }, new { @class = "btn btn-primary btn-sm" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MemberID }, new { @class = "btn btn-danger btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>
 
