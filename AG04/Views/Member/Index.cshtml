@@ -34,9 +34,8 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td style="width:240px;">
-                Name
-               @* @Html.DisplayFor(modelItem => item.Name)*@
+            <td style="width:240px;">                
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td style="width:240px;">
                 @Html.DisplayFor(modelItem => item.Email)

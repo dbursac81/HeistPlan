@@ -5,7 +5,7 @@ using System.Web;
 
 namespace AG04
 {
-    public class SkillModel
+    public class MemberModel
     {
         public int MemberID { get; set; }
         public string Name { get; set; }
@@ -15,10 +15,10 @@ namespace AG04
         public Nullable<bool> Active { get; set; }
         public Nullable<bool> ActiveInHeist { get; set; }
 
-        public List<Skill> Skills { get; set; }
+        public List<MemberSkill> Skills { get; set; }
     }
 
-    public class Skill
+    public class MemberSkill
     {
         public int SkillID { get; set; }
         public int MemberID { get; set; }

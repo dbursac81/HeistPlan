@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Ag04Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Ag04Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblHeist">
           <Key>
             <PropertyRef Name="HeistID" />
@@ -12,7 +12,9 @@
           <Property Name="HeistID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartDate" Type="date" />
           <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndDate" Type="date" />
           <Property Name="EndTime" Type="datetime" />
           <Property Name="Active" Type="bit" />
         </EntityType>
@@ -84,8 +86,7 @@
             <End Role="tblMemberSkills" EntitySet="tblMemberSkills" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Ag04Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -100,6 +101,8 @@
           <Property Name="EndTime" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="tblHeistSkills" Relationship="Self.FK_tblHeistSkills_tblHeist" FromRole="tblHeist" ToRole="tblHeistSkills" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="tblHeistSkills">
           <Key>
@@ -181,6 +184,8 @@
           <EntitySetMapping Name="tblHeist">
             <EntityTypeMapping TypeName="Ag04Model.tblHeist">
               <MappingFragment StoreEntitySet="tblHeist">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="HeistID" ColumnName="HeistID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Location" ColumnName="Location" />

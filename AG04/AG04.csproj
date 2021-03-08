@@ -150,7 +150,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\SkillModel.cs" />
+    <Compile Include="Models\HeistModel.cs" />
+    <Compile Include="Models\MemberModel.cs" />
     <Compile Include="Models\tblHeist.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
@@ -233,6 +234,7 @@
     <Content Include="Views\Skill\Delete.cshtml" />
     <Content Include="Views\Skill\Details.cshtml" />
     <Content Include="Views\Skill\Warning.cshtml" />
+    <Content Include="Views\Heist\CreateHeistSkills.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,7 +11,8 @@ namespace AG04.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblHeist
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,11 +22,30 @@ namespace AG04.Models
         }
     
         public int HeistID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Location { get; set; }
-        public Nullable<System.DateTime> StartTime { get; set; }
-        public Nullable<System.DateTime> EndTime { get; set; }
-        public Nullable<bool> Active { get; set; }
+        [Display(Name = "Start date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime StartDate { get; set; }
+
+        [Display(Name = "Start time")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
+        public DateTime StartTime { get; set; }
+
+        [Display(Name = "End date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime EndDate { get; set; }
+
+        [Display(Name = "End time")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
+        public DateTime EndTime { get; set; }
+        public Nullable<bool> Active { get; set; }        
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblHeistSkills> tblHeistSkills { get; set; }

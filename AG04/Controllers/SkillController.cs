@@ -60,12 +60,21 @@ namespace AG04.Controllers
 
                 return RedirectToAction("Details", "Member", new { @id = model.MemberID });
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return View();
             }
         }
 
+        public ActionResult CreateHeistSkills(int heistId)
+        {
+            ViewBag.Skills = new SelectList(memberSkills);
+
+            tblHeistSkills skills = new tblHeistSkills();
+
+            return View("CreateHeistSkills", skills);
+        }
+        
         // GET: Skill/Edit/5
         public ActionResult Edit(int id)
         {

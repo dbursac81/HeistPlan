@@ -139,30 +139,30 @@ namespace AG04.Controllers
 
             var skillList = member.tblMemberSkills.OrderBy(m => m.Name).ToArray();
 
-            SkillModel skil = new SkillModel();
-            skil.Skills = new List<Skill>();
+            MemberModel mem = new MemberModel();
+            mem.Skills = new List<MemberSkill>();
 
-            skil.MemberID = member.MemberID;
-            skil.Name = member.Name;
-            skil.Email = member.Email;
-            skil.Sex = member.Sex;
-            skil.Status = member.Status;
-            skil.Active = member.Active;
-            skil.ActiveInHeist = member.ActiveInHeist;
+            mem.MemberID = member.MemberID;
+            mem.Name = member.Name;
+            mem.Email = member.Email;
+            mem.Sex = member.Sex;
+            mem.Status = member.Status;
+            mem.Active = member.Active;
+            mem.ActiveInHeist = member.ActiveInHeist;
 
             for (int i = 0; i < skillList.Count(); i++)
-            {           
-                Skill sk = new Skill
+            {
+                MemberSkill sk = new MemberSkill
                 {
                     SkillID = skillList[i].SkillID,
                     Name = skillList[i].Name,
                     Level = skillList[i].SkillLevel
                 };
 
-                skil.Skills.Add(sk);
+                mem.Skills.Add(sk);
             }
 
-            return View(skil);
+            return View(mem);
         }
 
         private tblMember GetMemberByID(int? id)
