@@ -22,9 +22,9 @@ namespace AG04.Models
         }
     
         public int HeistID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field can not be empty")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field can not be empty")]
         public string Location { get; set; }
         [Display(Name = "Start date")]
         [DataType(DataType.Date)]

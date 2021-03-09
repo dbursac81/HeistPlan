@@ -37,36 +37,12 @@ namespace AG04.Controllers
         [HttpPost]
         public ActionResult Create(HeistModel model)
         {
-            tblHeist heist = new tblHeist();
-            {
-                heist.Name = model.Name;
-                heist.Location = model.Location;
-                heist.StartDate = model.StartDate;
-                heist.StartTime = model.StartTime;
-                heist.EndDate = model.EndDate;
-                heist.EndTime = model.EndTime;
-                heist.Active = model.Active;
-            }
-
-            db.tblHeist.Add(heist);
-            db.SaveChanges();
-
-            return View("Create", model);
-        }
-
-
-        public ActionResult CreateHeistSkills(HeistModel model)
-        {
-            ViewBag.Skills = new SelectList(heistkills);
-
-            bool result = HeistExists(model);
-
-            if (result == false)
+            try
             {
                 tblHeist heist = new tblHeist();
                 {
-                    heist.Name = model.Name;
-                    heist.Location = model.Location;
+                    heist.Name = model?.Name ?? null;
+                    heist.Location = model?.Location ?? null;
                     heist.StartDate = model.StartDate;
                     heist.StartTime = model.StartTime;
                     heist.EndDate = model.EndDate;
@@ -74,10 +50,58 @@ namespace AG04.Controllers
                     heist.Active = model.Active;
                 }
 
-                tblHeistSkills skills = new tblHeistSkills();
-
                 db.tblHeist.Add(heist);
                 db.SaveChanges();
+
+                List<tblHeist> heists = new List<tblHeist>();
+                heists = db.tblHeist.Where(m => m.Active == true).ToList();
+
+                return View("Index", heists);
+            }
+            catch 
+            { 
+                return View("Create", model); 
+            }
+        }
+
+
+        public ActionResult CreateHeistSkills(HeistModel model)
+        {
+            ViewBag.Skills = new SelectList(heistkills);
+
+            bool result = false;
+            if (!string.IsNullOrEmpty(model.Name) || !string.IsNullOrEmpty(model.Location)) 
+            {
+                result = HeistExists(model); 
+            }
+
+            if (result == false)
+            {
+                try
+                {
+                    tblHeist heist = new tblHeist();
+                    {
+                        heist.Name = model?.Name ?? "";
+                        heist.Location = model?.Location ?? "";
+                        heist.StartDate = model.StartDate;
+                        heist.StartTime = model.StartTime;
+                        heist.EndDate = model.EndDate;
+                        heist.EndTime = model.EndTime;
+                        heist.Active = model.Active;
+                    }
+
+                    db.tblHeist.Add(heist);
+                    db.SaveChanges();
+
+                    List<tblHeist> heists = new List<tblHeist>();
+                    heists = db.tblHeist.Where(m => m.Active == true).ToList();
+
+                    return View("Index", heists);
+                }
+                catch
+                {
+                    return View("Create", model);
+                }
             }
             else
             {
