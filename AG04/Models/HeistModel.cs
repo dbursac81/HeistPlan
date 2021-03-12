@@ -17,33 +17,32 @@ namespace AG04
         [Display(Name = "Start date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime StartDate { get; set; }
+        public Nullable<DateTime> StartDate { get; set; }
 
         [Display(Name = "Start time")]
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
-        public DateTime StartTime { get; set; }
+        public Nullable<DateTime> StartTime { get; set; }
 
         [Display(Name = "End date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime EndDate { get; set; }
+        public Nullable<DateTime> EndDate { get; set; }
 
         [Display(Name = "End time")]
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
-        public DateTime EndTime { get; set; }
+        public Nullable<DateTime> EndTime { get; set; }
 
         public string Status { get; set; }
         public bool Active { get; set; }
 
-        List<HeistSkillModel> Skills { get; set; }
-    }
+        public int SkillsID { get; set; }      
+        public string SkillLevel { get; set; }
+        public Nullable<short> MembersNo { get; set; }
 
-    public class HeistSkillModel
-    {
-        public string Name { get; set; }
-        public string Level { get; set; }
-        public int MembersRequired { get; set; }
-    }
+        public List<HeistSkillModel> HeistSkills { get; set; }
+
+        public List<HeistMemberModel> HeistMembers { get; set; }
+    }  
 }

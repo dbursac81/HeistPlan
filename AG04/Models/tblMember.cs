@@ -18,6 +18,7 @@ namespace AG04.Models
         public tblMember()
         {
             this.tblMemberSkills = new HashSet<tblMemberSkills>();
+            this.tblHeistMembers = new HashSet<tblHeistMembers>();
         }
     
         public int MemberID { get; set; }
@@ -27,8 +28,10 @@ namespace AG04.Models
         public string Status { get; set; }
         public Nullable<bool> Active { get; set; }
         public Nullable<bool> ActiveInHeist { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMemberSkills> tblMemberSkills { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblHeistMembers> tblHeistMembers { get; set; }
     }
 }

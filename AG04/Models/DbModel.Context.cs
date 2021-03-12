@@ -29,5 +29,6 @@ namespace AG04.Models
         public virtual DbSet<tblHeistSkills> tblHeistSkills { get; set; }
         public virtual DbSet<tblMember> tblMember { get; set; }
         public virtual DbSet<tblMemberSkills> tblMemberSkills { get; set; }
+        public virtual DbSet<tblHeistMembers> tblHeistMembers { get; set; }
     }
 }

@@ -40,6 +40,7 @@ namespace AG04.Controllers
 
         // POST: Skill/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(tblMemberSkills model)
         {
             ViewBag.Skills = new SelectList(memberSkills);
@@ -87,6 +88,7 @@ namespace AG04.Controllers
 
         // POST: Skill/Edit/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(tblMemberSkills skills)
         {
             ViewBag.Skills = new SelectList(memberSkills);
@@ -119,6 +121,7 @@ namespace AG04.Controllers
 
         // POST: Skill/Delete/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             try

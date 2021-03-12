@@ -43,7 +43,7 @@ namespace AG04.Controllers
             tblMember member = new tblMember
             {
                 Active = true,
-                ActiveInHeist = false,
+                //ActiveInHeist = false,
                 Name = model?.Name ?? "",
                 Email = model?.Email ?? "",
                 Sex = model.Sex,
@@ -83,7 +83,6 @@ namespace AG04.Controllers
             return RedirectToAction("Index");
         }
 
-
         public ActionResult Edit(int? id)
         {
             ViewBag.MemberStatus = new SelectList(memberStatus);
@@ -99,6 +98,7 @@ namespace AG04.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(tblMember model)
         {
             ViewBag.MemberStatus = new SelectList(memberStatus);
@@ -111,7 +111,7 @@ namespace AG04.Controllers
             member.Sex = model?.Sex ?? "";
             member.Status = model?.Status ?? "";
             member.Active = model.Active;
-            member.ActiveInHeist = model.ActiveInHeist;
+            //member.ActiveInHeist = model.ActiveInHeist;
 
             db.SaveChanges();
 
@@ -148,7 +148,7 @@ namespace AG04.Controllers
             mem.Sex = member.Sex;
             mem.Status = member.Status;
             mem.Active = member.Active;
-            mem.ActiveInHeist = member.ActiveInHeist;
+            //mem.ActiveInHeist = member.ActiveInHeist;
 
             for (int i = 0; i < skillList.Count(); i++)
             {
@@ -171,6 +171,5 @@ namespace AG04.Controllers
 
             return member;
         }
-
     }
 }

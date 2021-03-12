@@ -11,6 +11,9 @@
         <EntityTypeShape EntityType="Ag04Model.tblMemberSkills" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="Ag04Model.FK_tblHeistSkills_tblHeist" ManuallyRouted="false" />
         <AssociationConnector Association="Ag04Model.FK_tblMemberSkills_tblMember" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Ag04Model.tblHeistMembers" Width="1.5" PointX="6" PointY="3.5" />
+        <AssociationConnector Association="Ag04Model.FK_tblHeistMembers_tblHeist" />
+        <AssociationConnector Association="Ag04Model.FK_tblHeistMembers_tblMember" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

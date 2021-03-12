@@ -12,14 +12,14 @@ namespace AG04.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tblHeistSkills
+    public partial class tblHeistMembers
     {
-        public int SkillsID { get; set; }
-        public int HeistID { get; set; }
-        public string Name { get; set; }
-        public string SkillLevel { get; set; }
-        public Nullable<short> MembersNo { get; set; }
+        public int ID { get; set; }
+        public Nullable<int> HeistID { get; set; }
+        public Nullable<int> MemberID { get; set; }
+        public Nullable<bool> ActiveInHeist { get; set; }
     
         public virtual tblHeist tblHeist { get; set; }
+        public virtual tblMember tblMember { get; set; }
     }
 }

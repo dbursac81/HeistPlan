@@ -18,14 +18,23 @@
           <Property Name="EndTime" Type="datetime" />
           <Property Name="Active" Type="bit" />
         </EntityType>
+        <EntityType Name="tblHeistMembers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HeistID" Type="int" />
+          <Property Name="MemberID" Type="int" />
+          <Property Name="ActiveInHeist" Type="bit" />
+        </EntityType>
         <EntityType Name="tblHeistSkills">
           <Key>
             <PropertyRef Name="SkillsID" />
           </Key>
-          <Property Name="SkillsID" Type="int" Nullable="false" />
+          <Property Name="SkillsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HeistID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="SkillLevel" Type="smallint" />
+          <Property Name="SkillLevel" Type="nvarchar" MaxLength="10" />
           <Property Name="MembersNo" Type="smallint" />
         </EntityType>
         <EntityType Name="tblMember">
@@ -38,6 +47,7 @@
           <Property Name="Sex" Type="nchar" MaxLength="1" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="Active" Type="bit" />
+          <Property Name="ActiveInHeist" Type="bit" />
         </EntityType>
         <EntityType Name="tblMemberSkills">
           <Key>
@@ -48,6 +58,30 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SkillLevel" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <Association Name="FK_tblHeistMembers_tblHeist">
+          <End Role="tblHeist" Type="Self.tblHeist" Multiplicity="0..1" />
+          <End Role="tblHeistMembers" Type="Self.tblHeistMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHeist">
+              <PropertyRef Name="HeistID" />
+            </Principal>
+            <Dependent Role="tblHeistMembers">
+              <PropertyRef Name="HeistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblHeistMembers_tblMember">
+          <End Role="tblMember" Type="Self.tblMember" Multiplicity="0..1" />
+          <End Role="tblHeistMembers" Type="Self.tblHeistMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMember">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="tblHeistMembers">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblHeistSkills_tblHeist">
           <End Role="tblHeist" Type="Self.tblHeist" Multiplicity="1" />
           <End Role="tblHeistSkills" Type="Self.tblHeistSkills" Multiplicity="*" />
@@ -74,9 +108,18 @@
         </Association>
         <EntityContainer Name="Ag04ModelStoreContainer">
           <EntitySet Name="tblHeist" EntityType="Self.tblHeist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHeistMembers" EntityType="Self.tblHeistMembers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeistSkills" EntityType="Self.tblHeistSkills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMember" EntityType="Self.tblMember" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMemberSkills" EntityType="Self.tblMemberSkills" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblHeistMembers_tblHeist" Association="Self.FK_tblHeistMembers_tblHeist">
+            <End Role="tblHeist" EntitySet="tblHeist" />
+            <End Role="tblHeistMembers" EntitySet="tblHeistMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblHeistMembers_tblMember" Association="Self.FK_tblHeistMembers_tblMember">
+            <End Role="tblMember" EntitySet="tblMember" />
+            <End Role="tblHeistMembers" EntitySet="tblHeistMembers" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblHeistSkills_tblHeist" Association="Self.FK_tblHeistSkills_tblHeist">
             <End Role="tblHeist" EntitySet="tblHeist" />
             <End Role="tblHeistSkills" EntitySet="tblHeistSkills" />
@@ -103,6 +146,7 @@
           <NavigationProperty Name="tblHeistSkills" Relationship="Self.FK_tblHeistSkills_tblHeist" FromRole="tblHeist" ToRole="tblHeistSkills" />
           <Property Name="StartDate" Type="DateTime" Precision="0" />
           <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tblHeistMembers" Relationship="Ag04Model.FK_tblHeistMembers_tblHeist" FromRole="tblHeist" ToRole="tblHeistMembers" />
         </EntityType>
         <EntityType Name="tblHeistSkills">
           <Key>
@@ -111,7 +155,7 @@
           <Property Name="SkillsID" Type="Int32" Nullable="false" />
           <Property Name="HeistID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SkillLevel" Type="Int16" />
+          <Property Name="SkillLevel" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
           <Property Name="MembersNo" Type="Int16" />
           <NavigationProperty Name="tblHeist" Relationship="Self.FK_tblHeistSkills_tblHeist" FromRole="tblHeistSkills" ToRole="tblHeist" />
         </EntityType>
@@ -126,6 +170,8 @@
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="tblMemberSkills" Relationship="Self.FK_tblMemberSkills_tblMember" FromRole="tblMember" ToRole="tblMemberSkills" />
+          <NavigationProperty Name="tblHeistMembers" Relationship="Ag04Model.FK_tblHeistMembers_tblMember" FromRole="tblMember" ToRole="tblHeistMembers" />
+          <Property Name="ActiveInHeist" Type="Boolean" />
         </EntityType>
         <EntityType Name="tblMemberSkills">
           <Key>
@@ -174,7 +220,51 @@
             <End Role="tblMember" EntitySet="tblMember" />
             <End Role="tblMemberSkills" EntitySet="tblMemberSkills" />
           </AssociationSet>
+          <EntitySet Name="tblHeistMembers" EntityType="Ag04Model.tblHeistMembers" />
+          <AssociationSet Name="FK_tblHeistMembers_tblHeist" Association="Ag04Model.FK_tblHeistMembers_tblHeist">
+            <End Role="tblHeist" EntitySet="tblHeist" />
+            <End Role="tblHeistMembers" EntitySet="tblHeistMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblHeistMembers_tblMember" Association="Ag04Model.FK_tblHeistMembers_tblMember">
+            <End Role="tblMember" EntitySet="tblMember" />
+            <End Role="tblHeistMembers" EntitySet="tblHeistMembers" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tblHeistMembers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HeistID" Type="Int32" />
+          <Property Name="MemberID" Type="Int32" />
+          <NavigationProperty Name="tblHeist" Relationship="Ag04Model.FK_tblHeistMembers_tblHeist" FromRole="tblHeistMembers" ToRole="tblHeist" />
+          <NavigationProperty Name="tblMember" Relationship="Ag04Model.FK_tblHeistMembers_tblMember" FromRole="tblHeistMembers" ToRole="tblMember" />
+          <Property Name="ActiveInHeist" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_tblHeistMembers_tblHeist">
+          <End Type="Ag04Model.tblHeist" Role="tblHeist" Multiplicity="0..1" />
+          <End Type="Ag04Model.tblHeistMembers" Role="tblHeistMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHeist">
+              <PropertyRef Name="HeistID" />
+            </Principal>
+            <Dependent Role="tblHeistMembers">
+              <PropertyRef Name="HeistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblHeistMembers_tblMember">
+          <End Type="Ag04Model.tblMember" Role="tblMember" Multiplicity="0..1" />
+          <End Type="Ag04Model.tblHeistMembers" Role="tblHeistMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMember">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="tblHeistMembers">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -198,10 +288,10 @@
           <EntitySetMapping Name="tblHeistSkills">
             <EntityTypeMapping TypeName="Ag04Model.tblHeistSkills">
               <MappingFragment StoreEntitySet="tblHeistSkills">
+                <ScalarProperty Name="SkillLevel" ColumnName="SkillLevel" />
                 <ScalarProperty Name="SkillsID" ColumnName="SkillsID" />
                 <ScalarProperty Name="HeistID" ColumnName="HeistID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="SkillLevel" ColumnName="SkillLevel" />
                 <ScalarProperty Name="MembersNo" ColumnName="MembersNo" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -209,6 +299,7 @@
           <EntitySetMapping Name="tblMember">
             <EntityTypeMapping TypeName="Ag04Model.tblMember">
               <MappingFragment StoreEntitySet="tblMember">
+                <ScalarProperty Name="ActiveInHeist" ColumnName="ActiveInHeist" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -225,6 +316,16 @@
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="SkillLevel" ColumnName="SkillLevel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblHeistMembers">
+            <EntityTypeMapping TypeName="Ag04Model.tblHeistMembers">
+              <MappingFragment StoreEntitySet="tblHeistMembers">
+                <ScalarProperty Name="ActiveInHeist" ColumnName="ActiveInHeist" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="HeistID" ColumnName="HeistID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
