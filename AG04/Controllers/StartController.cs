@@ -11,8 +11,6 @@ namespace AG04.Controllers
         // GET: Start
         public ActionResult Index()
         {
-
-
             return View();
         }
     }

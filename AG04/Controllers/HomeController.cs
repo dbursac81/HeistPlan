@@ -13,6 +13,12 @@ namespace AG04.Controllers
             return View();
         }
 
+        public ActionResult Start()
+        {
+
+            return View();
+        }
+
        
     }
 }
