@@ -277,6 +277,18 @@ namespace AG04.Controllers
 
             ViewBag.HeistID = id;
 
+            var totall = db.tblHeistSkills.Where(m=>m.HeistID == id).ToArray();
+
+            int total = 0;
+            foreach(tblHeistSkills item in totall)
+            {
+                total += (Int32)item.MembersNo;
+            }
+
+            ViewBag.MembersRequiredTotal = total;
+
+            ViewBag.MembersAssignedTotal = db.tblHeistMembers.Where(m => m.HeistID == id).Count();
+
             tblHeist heist = GetHeistByID(id);
 
             var _skillsList = heist.tblHeistSkills.OrderBy(m => m.HeistID).ToArray();

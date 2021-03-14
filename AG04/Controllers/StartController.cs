@@ -6,13 +6,14 @@ using System.Web.Mvc;
 
 namespace AG04.Controllers
 {
-    public class HomeController : Controller
+    public class StartController : Controller
     {
+        // GET: Start
         public ActionResult Index()
         {
+
+
             return View();
         }
-
-       
     }
 }
