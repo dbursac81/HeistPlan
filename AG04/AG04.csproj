@@ -244,7 +244,8 @@
     <Content Include="Views\Heist\DeleteMember.cshtml" />
     <Content Include="Views\Heist\AddHeistMember.cshtml" />
     <Content Include="Views\Start\Index.cshtml" />
-    <Content Include="Views\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Start.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
