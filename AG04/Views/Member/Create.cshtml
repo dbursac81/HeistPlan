@@ -33,7 +33,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Sex, (SelectList)(ViewBag.MemberSex).Items, "--Choose gender--", new { @class = "form-control", style = "width:175px;" })
+            @Html.DropDownListFor(model => model.Sex, (SelectList)(ViewBag.memberGender).Items, "--Choose gender--", new { @class = "form-control", style = "width:175px;" })
             @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
         </div>
     </div>

@@ -12,15 +12,14 @@ namespace AG04.Controllers
     {
         private Ag04Entities db = new Ag04Entities();
 
-        private readonly SelectList memberSex = new SelectList(new[] { "M", "F" });
+        private readonly SelectList memberGender = new SelectList(new[] { "M", "F" });
         private readonly SelectList memberStatus = new SelectList(new[] { "AVAILABLE", "EXPIRED", "INCARCERATED", "RETIRED" });
-        
-        // GET: Member
+                
         [HttpGet]
         public ActionResult Index()
         {
             ViewBag.MemberStatus = new SelectList(memberStatus);
-            ViewBag.MemberSex = new SelectList(memberSex);
+            ViewBag.memberGender = new SelectList(memberGender);
 
             IEnumerable<tblMember> members = db.tblMember.ToList();
 
@@ -31,7 +30,7 @@ namespace AG04.Controllers
         public ActionResult Create()
         {
             ViewBag.MemberStatus = new SelectList(memberStatus);
-            ViewBag.MemberSex = new SelectList(memberSex);
+            ViewBag.memberGender = new SelectList(memberGender);
 
             return View();
         }
@@ -86,7 +85,7 @@ namespace AG04.Controllers
         public ActionResult Edit(int? id)
         {
             ViewBag.MemberStatus = new SelectList(memberStatus);
-            ViewBag.MemberSex = new SelectList(memberSex);
+            ViewBag.memberGender = new SelectList(memberGender);
 
             tblMember member = new tblMember();
             if (id != null)
@@ -102,7 +101,7 @@ namespace AG04.Controllers
         public ActionResult Edit(tblMember model)
         {
             ViewBag.MemberStatus = new SelectList(memberStatus);
-            ViewBag.MemberSex = new SelectList(memberSex);
+            ViewBag.memberGender = new SelectList(memberGender);
 
             tblMember member = GetMemberByID(model.MemberID);
 
@@ -121,7 +120,7 @@ namespace AG04.Controllers
         public ActionResult Details(int? id)
         {
             ViewBag.MemberStatus = new SelectList(memberStatus);
-            ViewBag.MemberSex = new SelectList(memberSex);
+            ViewBag.memberGender = new SelectList(memberGender);
 
             if (id == null)
             {

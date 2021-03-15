@@ -14,7 +14,7 @@ namespace AG04.Controllers
 
         private readonly SelectList heistkills = new SelectList(new[] { "COMBAT", "STRENGTH", "STAMINA", "DRIVING", "LOCK PICKING", "CAR BOOSTING", "MONEY LAUNDERING" });
 
-        // GET: Heist
+        
         [HttpGet]
         public ActionResult Index()
         {
@@ -80,6 +80,7 @@ namespace AG04.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateHeistSkills(tblHeistSkills model)
         {
             ViewBag.Skills = new SelectList(heistkills);
@@ -277,10 +278,10 @@ namespace AG04.Controllers
 
             ViewBag.HeistID = id;
 
-            var totall = db.tblHeistSkills.Where(m=>m.HeistID == id).ToArray();
+            var totall = db.tblHeistSkills.Where(m => m.HeistID == id).ToArray();
 
             int total = 0;
-            foreach(tblHeistSkills item in totall)
+            foreach (tblHeistSkills item in totall)
             {
                 total += (Int32)item.MembersNo;
             }
@@ -340,7 +341,7 @@ namespace AG04.Controllers
             //getting members
             var _allMembers = GetMatchingMembers(heistID);
 
-            List<HeistMemberModel> _list = _allMembers.ToList();           
+            List<HeistMemberModel> _list = _allMembers.ToList();
             hm.HeistMembers = _allMembers as List<HeistMemberModel>;
 
             ViewBag.MatchingMembers = new SelectList(_list);
@@ -574,7 +575,7 @@ namespace AG04.Controllers
                         }
                     }
                 }
-            }           
+            }
 
             return matchingMembers;
         }

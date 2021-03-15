@@ -12,21 +12,18 @@ namespace AG04.Controllers
         private Ag04Entities db = new Ag04Entities();
 
         private readonly SelectList memberSkills = new SelectList(new[] { "COMBAT", "STRENGTH", "STAMINA", "DRIVING", "LOCK PICKING", "CAR BOOSTING", "MONEY LAUNDERING"});
-
-        // GET: Skill
+                
         public ActionResult Index()
         {
             return View();
         }
-
-        // GET: Skill/Details/5
+                
         public ActionResult Details(int id)
         {
 
             return View();
         }
-
-        // GET: Skill/Create
+               
         public ActionResult Create(int id)
         {
             ViewBag.Skills = new SelectList(memberSkills);
@@ -37,8 +34,7 @@ namespace AG04.Controllers
 
             return View(model);
         }
-
-        // POST: Skill/Create
+                
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(tblMemberSkills model)
@@ -75,8 +71,7 @@ namespace AG04.Controllers
 
             return View("CreateHeistSkills", skills);
         }
-        
-        // GET: Skill/Edit/5
+                
         public ActionResult Edit(int id)
         {
             ViewBag.Skills = new SelectList(memberSkills);
@@ -85,8 +80,7 @@ namespace AG04.Controllers
 
             return View(ms);
         }
-
-        // POST: Skill/Edit/5
+                
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(tblMemberSkills skills)
@@ -108,8 +102,7 @@ namespace AG04.Controllers
                 return View();
             }
         }
-
-        // GET: Skill/Delete/5
+               
         public ActionResult Delete(int? id)
         {
             ViewBag.Skills = new SelectList(memberSkills);
@@ -118,8 +111,7 @@ namespace AG04.Controllers
 
             return View(ms);
         }
-
-        // POST: Skill/Delete/5
+                
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)

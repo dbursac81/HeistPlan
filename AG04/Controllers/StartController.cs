@@ -11,8 +11,7 @@ namespace AG04.Controllers
     public class StartController : Controller
     {
         private Ag04Entities db = new Ag04Entities();
-
-        // GET: Start
+               
         [HttpGet]
         public ActionResult Activation()
         {
