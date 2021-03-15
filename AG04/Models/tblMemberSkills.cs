@@ -19,7 +19,7 @@ namespace AG04.Models
         public int MemberID { get; set; }
         public string Name { get; set; }
 
-        [StringLength(10, MinimumLength = 3, ErrorMessage = "Min 3 and max 10")]
+        [StringLength(10, MinimumLength = 1, ErrorMessage = "Min 1 and max 10")]
         public string SkillLevel { get; set; }
     
         public virtual tblMember tblMember { get; set; }

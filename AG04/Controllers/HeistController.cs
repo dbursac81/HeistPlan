@@ -57,7 +57,7 @@ namespace AG04.Controllers
                 db.SaveChanges();
 
                 List<tblHeist> heists = new List<tblHeist>();
-                heists = db.tblHeist.Where(m => m.Active == true).ToList();
+                heists = db.tblHeist.Where(m => m.Active == false).ToList();
 
                 return View("Index", heists);
             }
@@ -85,18 +85,25 @@ namespace AG04.Controllers
         {
             ViewBag.Skills = new SelectList(heistkills);
 
-            tblHeistSkills skill = new tblHeistSkills
+            try
             {
-                HeistID = model.HeistID,
-                Name = model.Name,
-                SkillLevel = model.SkillLevel,
-                MembersNo = model.MembersNo
-            };
+                tblHeistSkills skill = new tblHeistSkills
+                {
+                    HeistID = model.HeistID,
+                    Name = model.Name,
+                    SkillLevel = model.SkillLevel,
+                    MembersNo = model.MembersNo
+                };
 
-            db.tblHeistSkills.Add(skill);
-            db.SaveChanges();
+                db.tblHeistSkills.Add(skill);
+                db.SaveChanges();
 
-            return RedirectToAction("Details", "Heist", new { @id = model.HeistID });
+                return RedirectToAction("Details", "Heist", new { @id = model.HeistID });
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         public ActionResult Delete(int? id)
@@ -236,7 +243,7 @@ namespace AG04.Controllers
                 db.SaveChanges();
 
                 List<tblHeist> heists = new List<tblHeist>();
-                heists = db.tblHeist.Where(m => m.Active == true).ToList();
+                heists = db.tblHeist.Where(m => m.Active == false).ToList();
 
                 return View("Index", heists);
             }
@@ -439,7 +446,7 @@ namespace AG04.Controllers
             bool result = false;
 
             List<tblHeist> heists = new List<tblHeist>();
-            heists = db.tblHeist.Where(m => m.Active == true).ToList();
+            heists = db.tblHeist.Where(m => m.Active == false).ToList();
 
             for (int i = 0; i < heists.Count(); i++)
             {
