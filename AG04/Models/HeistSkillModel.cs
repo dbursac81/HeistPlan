@@ -13,7 +13,7 @@ namespace AG04
         public string Name { get; set; }
         [StringLength(10, MinimumLength = 3, ErrorMessage = "Min 3 and max 10")]
         public string Level { get; set; }
-        [Range(3, 10, ErrorMessage = "Members number must be 3-10") ]
+        [Range(3, Int32.MaxValue, ErrorMessage = "Min 3 members") ]
         public int MembersNo { get; set; }
     }
 }
