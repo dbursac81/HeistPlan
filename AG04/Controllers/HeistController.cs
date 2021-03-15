@@ -150,7 +150,7 @@ namespace AG04.Controllers
                 db.SaveChanges();
 
                 List<tblHeist> heists = new List<tblHeist>();
-                heists = db.tblHeist.Where(m => m.Active == true).ToList();
+                heists = db.tblHeist.Where(m => m.Active == false).ToList();
 
                 return View("Index", heists);
             }
