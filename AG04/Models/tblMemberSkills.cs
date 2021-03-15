@@ -11,12 +11,15 @@ namespace AG04.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblMemberSkills
     {
         public int SkillID { get; set; }
         public int MemberID { get; set; }
         public string Name { get; set; }
+
+        [StringLength(10, MinimumLength = 3, ErrorMessage = "Min 3 and max 10")]
         public string SkillLevel { get; set; }
     
         public virtual tblMember tblMember { get; set; }

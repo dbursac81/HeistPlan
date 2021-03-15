@@ -78,22 +78,29 @@
 
                 @for (int i = 0; i < Model.HeistSkills.Count(); i++)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(m => m.HeistSkills[i].Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(m => m.HeistSkills[i].Level)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(m => m.HeistSkills[i].MembersNo)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "EditHeistSkill", "Heist", new { id = Model.HeistSkills[i].SkillID }, new { @class = "btn btn-info btn-sm" })
-                            @Html.ActionLink("Delete", "DeleteHeistSkill", "Heist", new { id = Model.HeistSkills[i].SkillID }, new { @class = "btn btn-danger btn-sm" })
-                        </td>
-                    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => m.HeistSkills[i].Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => m.HeistSkills[i].Level)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => m.HeistSkills[i].MembersNo)
+                </td>
+                
+                <td>
+                    @Html.ActionLink("Edit", "EditHeistSkill", "Heist", new { id = Model.HeistSkills[i].SkillID }, new { @class = "btn btn-info btn-sm" })
+                    @Html.ActionLink("Delete", "DeleteHeistSkill", "Heist", new { id = Model.HeistSkills[i].SkillID }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
                 }
+            <tr>
+                <td></td>
+                <td></td>
+                <td>TOTAL: @ViewBag.MembersRequiredTotal</td>
+                <td></td>
+            </tr>
             </table>
         </dd>
 
@@ -103,56 +110,49 @@
                     <th>
                         Assigned members
                     </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>                  
                 </tr>
                 @for (int i = 0; i < Model.HeistMembers.Count(); i++)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(m => m.HeistMembers[i].Name)
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                            @Html.ActionLink("Delete", "DeleteMember", "Heist", new { id = Model.HeistMembers[i].MemberID }, new { @class = "btn btn-danger btn-sm" })
-                        </td>
-                    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => m.HeistMembers[i].Name)
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteMember", "Heist", new { id = Model.HeistMembers[i].MemberID }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
                 }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>TOTAL: @ViewBag.MembersAssignedTotal</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>                           
             </table>
         </dd>
     </dl>

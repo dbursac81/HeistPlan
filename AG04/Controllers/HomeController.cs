@@ -11,14 +11,7 @@ namespace AG04.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-
-        public ActionResult Start()
-        {
-
-            return View();
-        }
-
+        } 
        
     }
 }

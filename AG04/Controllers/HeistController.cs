@@ -19,7 +19,7 @@ namespace AG04.Controllers
         public ActionResult Index()
         {
             List<tblHeist> heists = new List<tblHeist>();
-            heists = db.tblHeist.Where(m => m.Active == true).ToList();
+            heists = db.tblHeist.Where(m => m.Active == false).ToList();
 
             return View(heists);
         }
@@ -50,7 +50,7 @@ namespace AG04.Controllers
                     heist.StartTime = model.StartTime;
                     heist.EndDate = model.EndDate;
                     heist.EndTime = model.EndTime;
-                    heist.Active = model.Active;
+                    heist.Active = false;
                 }
 
                 db.tblHeist.Add(heist);
@@ -340,8 +340,7 @@ namespace AG04.Controllers
             //getting members
             var _allMembers = GetMatchingMembers(heistID);
 
-            List<HeistMemberModel> _list = _allMembers.ToList();
-            List<HeistMemberModel> list = _list.Distinct().ToList();
+            List<HeistMemberModel> _list = _allMembers.ToList();           
             hm.HeistMembers = _allMembers as List<HeistMemberModel>;
 
             ViewBag.MatchingMembers = new SelectList(_list);

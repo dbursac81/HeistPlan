@@ -25,6 +25,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HeistID" Type="int" />
           <Property Name="MemberID" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="30" />
           <Property Name="ActiveInHeist" Type="bit" />
         </EntityType>
         <EntityType Name="tblHeistSkills">
@@ -240,6 +241,7 @@
           <NavigationProperty Name="tblHeist" Relationship="Ag04Model.FK_tblHeistMembers_tblHeist" FromRole="tblHeistMembers" ToRole="tblHeist" />
           <NavigationProperty Name="tblMember" Relationship="Ag04Model.FK_tblHeistMembers_tblMember" FromRole="tblHeistMembers" ToRole="tblMember" />
           <Property Name="ActiveInHeist" Type="Boolean" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_tblHeistMembers_tblHeist">
           <End Type="Ag04Model.tblHeist" Role="tblHeist" Multiplicity="0..1" />
@@ -322,6 +324,7 @@
           <EntitySetMapping Name="tblHeistMembers">
             <EntityTypeMapping TypeName="Ag04Model.tblHeistMembers">
               <MappingFragment StoreEntitySet="tblHeistMembers">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ActiveInHeist" ColumnName="ActiveInHeist" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="HeistID" ColumnName="HeistID" />

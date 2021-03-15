@@ -1,0 +1,40 @@
+﻿@model  AG04.Models.tblHeist
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Heist activation</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })       
+        @Html.HiddenFor(model => model.HeistID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownListFor(model => model.Name, (SelectList)(ViewBag.MatchingMembers).Items, "--Choose member--", new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.Name, new SelectList(ViewBag.InactiveHeists.Items,"HeistID", "Name"), "--Choose heist for activation--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Activate heist" class="btn btn-primary" style="width:150px; height:40px"/> 
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

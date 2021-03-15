@@ -1,0 +1,17 @@
+﻿@model  AG04.ResultModel
+
+@{
+    ViewBag.Title = "HeistResult";
+}
+
+<h2>Heist result</h2>
+
+<p style="font-size:20px;">The Heist has: @Model.Result</p>
+<p style="font-size:20px;">Total members in heist: @Model.Total</p>
+<p style="font-size:20px;">Expired members: @Model.ExpiredNo</p>
+<p style="font-size:20px;">Incarcerated members: @Model.IncarceratedNo</p>
+
+<p>
+    @Html.ActionLink("Back to List", "Activation", "Start")
+</p>
+

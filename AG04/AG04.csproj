@@ -155,6 +155,7 @@
     <Compile Include="Models\HeistModel.cs" />
     <Compile Include="Models\HeistSkillModel.cs" />
     <Compile Include="Models\MemberModel.cs" />
+    <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Models\tblHeist.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
@@ -243,9 +244,10 @@
     <Content Include="Views\Heist\DeleteHeistSkill.cshtml" />
     <Content Include="Views\Heist\DeleteMember.cshtml" />
     <Content Include="Views\Heist\AddHeistMember.cshtml" />
-    <Content Include="Views\Start\Index.cshtml" />
+    <Content Include="Views\Start\Activation.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Start.cshtml" />
+    <Content Include="Views\Start\Error.cshtml" />
+    <Content Include="Views\Start\HeistResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

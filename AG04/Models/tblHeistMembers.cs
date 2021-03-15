@@ -18,6 +18,7 @@ namespace AG04.Models
         public Nullable<int> HeistID { get; set; }
         public Nullable<int> MemberID { get; set; }
         public Nullable<bool> ActiveInHeist { get; set; }
+        public string Status { get; set; }
     
         public virtual tblHeist tblHeist { get; set; }
         public virtual tblMember tblMember { get; set; }

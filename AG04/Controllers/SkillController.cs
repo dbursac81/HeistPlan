@@ -61,7 +61,7 @@ namespace AG04.Controllers
 
                 return RedirectToAction("Details", "Member", new { @id = model.MemberID });
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 return View();
             }
